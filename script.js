@@ -280,21 +280,23 @@ accordionHeaders.forEach(header => {
 const blogSearch = document.getElementById('blog-search');
 const blogCards = document.querySelectorAll('.blog-card');
 
-blogSearch.addEventListener('input', (e) => {
-  const searchTerm = e.target.value.toLowerCase();
+if (blogSearch) {
+  blogSearch.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
 
-  blogCards.forEach(card => {
-    const title = card.getAttribute('data-title').toLowerCase();
-    const category = card.getAttribute('data-category').toLowerCase();
-    const text = card.textContent.toLowerCase();
+    blogCards.forEach(card => {
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      const category = (card.getAttribute('data-category') || '').toLowerCase();
+      const text = card.textContent.toLowerCase();
 
-    if (title.includes(searchTerm) || category.includes(searchTerm) || text.includes(searchTerm)) {
-      card.style.display = 'block';
-    } else {
-      card.style.display = 'none';
-    }
+      if (title.includes(searchTerm) || category.includes(searchTerm) || text.includes(searchTerm)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   });
-});
+}
 
 // === CONTACT FORM ===
 const contactForm = document.getElementById('contact-form');
