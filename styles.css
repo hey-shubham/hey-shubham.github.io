@@ -394,18 +394,18 @@ code, pre {
 
 .image-frame {
     position: relative;
-    /* use a flexible width and allow natural height so image won't be cropped */
-    width: min(420px, 40%);
-    height: auto; /* allow image's natural height */
-    border-radius: 2rem;
+    /* stable, bounded size so local Live Server and GitHub Pages render similarly */
+    width: clamp(140px, 18vw, 200px);
+    height: auto;
+    border-radius: 1.25rem;
     border: 2px solid rgba(0, 229, 255, 0.5);
-    overflow: visible; /* allow full image to show instead of hiding edges */
+    overflow: hidden;
     box-shadow: var(--shadow-neon);
     background: linear-gradient(135deg, rgba(0, 229, 255, 0.06), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 0; /* keep same look as local server */
 }
 
 /* ensure the placeholder fills the frame and centers content */
@@ -422,23 +422,23 @@ code, pre {
 .placeholder-avatar img {
     width: 100%;
     height: auto;
+    max-width: 100%;
     object-fit: contain; /* show full image without cropping */
     display: block;
-    border-radius: 1rem; /* keep rounded corners visible */
+    border-radius: 0.75rem;
 }
 
-/* slightly larger on bigger screens if desired */
+/* slightly larger on very wide screens */
 @media (min-width: 1200px) {
     .image-frame {
-        width: 480px;
+        width: 220px;
     }
 }
 
-/* responsive tweak: maintain good sizing on small screens */
+/* responsive tweak for tablets/phones */
 @media (max-width: 768px) {
     .image-frame {
-        width: 260px;
-        padding: 8px;
+        width: 140px;
     }
 }
 
